@@ -31,10 +31,6 @@
     var myConnector = tableau.makeConnector();
     
     myConnector.getSchema = function(schemaCallback) {
-        // In this sample, we read our schema definition from a local JSON file.
-//        $.getJSON("SWapiData.json", function(schemaJson) {
-//            schemaCallback(schemaJson);
-//        });
         var schema = [
             {
                 "alias": "People",
@@ -91,7 +87,13 @@
  <div class="section">
  		 <div class="tableauContainer ">
  				<h4 class="section-heading centre">Star Wars API (Swa-pee) Web Data Connector for Tableau</h4>
- 				<p class="centre"> <img src="images/fitbit.png" alt="fitbit" style="width:450px;height:100px;"> </p>
+                <a href='#' onclick="setupConnector()">
+ 				<p class="centre"> 
+					 <img src="images/SW.ico" style="width:150px;height:150px">
+					 <img src="images/right.png" style="width:50px;height:50px">
+					 <img src="images/Tableau.png" style="width:150px;height:150px">
+                </p>
+                </a>
  				<p class="section-description centre">Please open this web data connector in Tableau Desktop</p>
 				<p class="centre">
 				<button type = "button" id = "submitButton" class = "btn btn-success" style = "margin-top: 10px;">Get your SWa-pee On! (get data)</button>
