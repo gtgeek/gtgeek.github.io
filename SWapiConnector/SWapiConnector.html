@@ -31,6 +31,10 @@
     var myConnector = tableau.makeConnector();
     
     myConnector.getSchema = function(schemaCallback) {
+        // In this sample, we read our schema definition from a local JSON file.
+//        $.getJSON("SWapiData.json", function(schemaJson) {
+//            schemaCallback(schemaJson);
+//        });
         var schema = [
             {
                 "alias": "People",
@@ -58,6 +62,7 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
+/*
         var apiURL = 'http://swapi.co/api/' + table.tableInfo.id;
         $.ajax(apiURL, {
             method: 'GET'
@@ -65,7 +70,22 @@
             table.appendRows(data.results);
             doneCallback();
         });
-    };
+ */
+        var apiURL = 'http://swapi.co/api/' + table.tableInfo.id + '/?page=1';
+        getAllREST(apiURL,table);
+        doneCallback();
+     };
+     
+     getAllREST = function(apiURL, table) {
+        $.ajax(apiURL, {
+            method: 'GET'
+        }).then(function(data) {
+            if (data.next != 'null')
+                apiURL = apiURL.substr(0,apiURL.indexOf('=')+1) + (parseInt(apiURL.substr(apiURL.indexOf('=')+1)) + 1);
+                getAllREST(apiURL, table);
+            table.appendRows(data.results);
+        });        
+     };
 
      setupConnector = function() {
         tableau.connectionName = "Star Wars API Connector";
