@@ -4,10 +4,10 @@
 	<meta http-equiv="Cache-Control" content="no-store" />
 	<head>
 	  <meta charset="utf-8">
-	  <title>Star Wars API (Swa-pee) Web Data Connector for Tableau by gtgeek</title>
-	  <meta name="application-name" content="Star Wars API (Swa-pee) Web Data Connector for Tableau by gtgeek">
+	  <title>Lending Club Web Data Connector for Tableau by gtgeek</title>
+	  <meta name="application-name" content="Lending Club Web Data Connector for Tableau by gtgeek">
 	  <meta name="author" content="gtgeek">
-		<meta name="description" content="Star Wars API (Swa-pee) Web Data Connector for Tableau by gtgeek">
+		<meta name="description" content="Lending Club Web Data Connector for Tableau by gtgeek">
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 	  <link rel="stylesheet" href="css/normalize.css">
@@ -31,30 +31,73 @@
     var myConnector = tableau.makeConnector();
     
     myConnector.getSchema = function(schemaCallback) {
-        // In this sample, we read our schema definition from a local JSON file.
-//        $.getJSON("SWapiData.json", function(schemaJson) {
-//            schemaCallback(schemaJson);
-//        });
         var schema = [
             {
-                "alias": "People",
-                "id": "people",
+                "alias": "Summary",
+                "id": "Summary",
                 "columns": [
-                    { "id": "name", "dataType": "string" },
-                    { "id": "height", "dataType": "int" },
-                    { "id": "mass", "dataType": "int" },
-                    { "id": "gender", "dataType": "string" }
+                    { "id": "investorId", "dataType": "int" },
+                    { "id": "availableCash", "dataType": "decimal" },
+                    { "id": "accountTotal", "dataType": "decimal" },
+                    { "id": "accruedInterest", "dataType": "decimal" },
+                    { "id": "infundingBalance", "dataType": "decimal" },
+                    { "id": "receivedInterest", "dataType": "decimal" },
+                    { "id": "receivedPrincipal", "dataType": "decimal" },
+                    { "id": "receivedLateFees", "dataType": "decimal" },
+                    { "id": "outstandingPrincipal", "dataType": "decimal" },
+                    { "id": "totalNotes", "dataType": "decimal" },
+                    { "id": "totalPortfolios", "dataType": "decimal" }
                 ]
             },
             {
-                "alias": "Planets",
-                "id": "planets",
+                "alias": "Notes Owned",
+                "id": "Notes Owned",
                 "columns": [
-                    { "id": "name", "dataType": "string" },
-                    { "id": "diameter", "dataType": "int" },
-                    { "id": "population", "dataType": "int" },
-                    { "id": "terrain", "dataType": "string" },
-                    { "id": "climate", "dataType": "string" }
+                    { "id": "investorId", "dataType": "int" },
+                    { "id": "availableCash", "dataType": "decimal" },
+                    { "id": "accountTotal", "dataType": "decimal" },
+                    { "id": "accruedInterest", "dataType": "decimal" },
+                    { "id": "infundingBalance", "dataType": "decimal" },
+                    { "id": "receivedInterest", "dataType": "decimal" },
+                    { "id": "receivedPrincipal", "dataType": "decimal" },
+                    { "id": "receivedLateFees", "dataType": "decimal" },
+                    { "id": "outstandingPrincipal", "dataType": "decimal" },
+                    { "id": "totalNotes", "dataType": "decimal" },
+                    { "id": "totalPortfolios", "dataType": "decimal" }
+                ]
+            },
+            {
+                "alias": "Detailed Notes Owned",
+                "id": "Detailed Notes Owned",
+                "columns": [
+                    { "id": "investorId", "dataType": "int" },
+                    { "id": "availableCash", "dataType": "decimal" },
+                    { "id": "accountTotal", "dataType": "decimal" },
+                    { "id": "accruedInterest", "dataType": "decimal" },
+                    { "id": "infundingBalance", "dataType": "decimal" },
+                    { "id": "receivedInterest", "dataType": "decimal" },
+                    { "id": "receivedPrincipal", "dataType": "decimal" },
+                    { "id": "receivedLateFees", "dataType": "decimal" },
+                    { "id": "outstandingPrincipal", "dataType": "decimal" },
+                    { "id": "totalNotes", "dataType": "decimal" },
+                    { "id": "totalPortfolios", "dataType": "decimal" }
+                ]
+            },
+            {
+                "alias": "Listed Loans",
+                "id": "Listed Loans",
+                "columns": [
+                    { "id": "investorId", "dataType": "int" },
+                    { "id": "availableCash", "dataType": "decimal" },
+                    { "id": "accountTotal", "dataType": "decimal" },
+                    { "id": "accruedInterest", "dataType": "decimal" },
+                    { "id": "infundingBalance", "dataType": "decimal" },
+                    { "id": "receivedInterest", "dataType": "decimal" },
+                    { "id": "receivedPrincipal", "dataType": "decimal" },
+                    { "id": "receivedLateFees", "dataType": "decimal" },
+                    { "id": "outstandingPrincipal", "dataType": "decimal" },
+                    { "id": "totalNotes", "dataType": "decimal" },
+                    { "id": "totalPortfolios", "dataType": "decimal" }
                 ]
             }
         ];
@@ -62,15 +105,51 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
-/*
-        var apiURL = 'http://swapi.co/api/' + table.tableInfo.id;
-        $.ajax(apiURL, {
-            method: 'GET'
-        }).then(function(data) {
-            table.appendRows(data.results);
+        var connectionData = JSON.parse(tableau.connectionData);
+        var i_id = connectionData.i_id;
+        var i_apiKey = connectionData.i_apiKey;
+
+        var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.lendingclub.com/api/investor/v1/accounts/" + i_id + "/summary",
+        "method": "GET",
+        "dataType": "json",
+        "headers": {
+            "Authorization": i_apiKey,
+            "cache-control": "no-cache"
+            }
+        }
+        console.log('yo');
+try {
+        $.ajax(settings).done(function (response) {
+            console.log('done');
+            console.log(response);
+            table.appendRows(response);
             doneCallback();
         });
- */
+} catch(e) {
+    console.log(e);
+}
+
+/*
+        var apiURL = 'https://api.lendingclub.com/api/investor/v1/accounts/' + i_id + '/summary';
+        console.log(apiURL);
+        console.log({
+                'Authorization':i_apiKey,
+                'Access-Control-Allow-Origin': '*'
+            });
+        $.ajax(apiURL, {
+            method: 'GET',
+            headers: {
+                'Authorization':i_apiKey,
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).then(function(data) {
+            table.appendRows(data);
+            doneCallback();
+        });
+
         getAllREST = function(apiURL, table) {
             $.ajax(apiURL, {
                 method: 'GET'
@@ -90,11 +169,21 @@
 
         var apiURL = 'http://swapi.co/api/' + table.tableInfo.id + '/?page=1';
         getAllREST(apiURL,table);
+*/
+
      };
      
 
      setupConnector = function() {
-        tableau.connectionName = "Star Wars API Connector";
+        tableau.connectionName = "Lending Club API";
+        var i_id = $("#i_id").val();
+        var i_apiKey = $("#i_apiKey").val();
+        
+        var connectionData = {
+            "i_id": parseInt(i_id),
+            "i_apiKey": i_apiKey
+        };
+        tableau.connectionData = JSON.stringify(connectionData);
         tableau.submit();
      };
 
@@ -112,18 +201,38 @@
 <div class='ajax-loading' id='loadingDiv'> </div>
  <div class="section">
  		 <div class="tableauContainer ">
- 				<h4 class="section-heading centre">Star Wars API (Swa-pee) Web Data Connector for Tableau</h4>
-                <a href='#' onclick="setupConnector()">
- 				<p class="centre"> 
-					 <img src="images/SW.ico" style="width:150px;height:150px">
-					 <img src="images/right.png" style="width:50px;height:50px">
-					 <img src="images/Tableau.png" style="width:150px;height:150px">
-                </p>
-                </a>
- 				<p class="section-description centre">Please open this web data connector in Tableau Desktop</p>
-				<p class="centre">
-				<button type = "button" id = "submitButton" class = "btn btn-success" style = "margin-top: 10px;">Get your SWa-pee On! (get data)</button>
- 		 		</p>
+            <h4 class="section-heading centre">Lending Club Web Data Connector for Tableau</h4>
+            <p class="section-description centre">Please open this web data connector in Tableau Desktop</p>
+
+            <div class='col-xs-2'></div>
+
+            <div class="main-content col-xs-8">
+            <a href='#' style='text-decoration: none;' onclick="setupConnector()">
+            <p class="centre"> 
+                    <img src="images/Source.png" style="width:150px;height:150px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="images/import.png" style="width:100px;height:90px">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="images/Tableau.png" style="width:150px;height:150px">
+            </p>
+            </a>
+
+                <ol>
+                    <li>Not a registered investor? <a href='https://www.lendingclub.com/landing/invest.action?reg_referrer=Member_28510219&progId=27658943'>Register</a> for a free investment account.</li>
+                    <li>
+                        <p><a href="/account/profile.action" rollapp-href="https://www.lendingclub.com/account/profile.action">Click here to request access to Lending Club's API <sup>*</sup></a></p>
+                    </li>
+                </ol>
+
+            <label for="i_id">Investor ID</label>
+            <input class="form-control" id="i_id" value="28510219">
+            <label for="i_apiKey">API key: <a href='<h></h>elp'>Instructions</a></label>
+            <input class="form-control" id="i_apiKey" value="zzr1wgg4JccdZ4ar0gMIsAikHFI=">
+
+            <p class="centre">
+            <button type = "button" id = "submitButton" class = "btn btn-success" style = "margin-top: 10px;">Get your Lending Club On! (get data)</button>
+            </p>
+            </div>
+
+            <div class='col-xs-2'></div>
 		  </div>
   </div>
  </div>

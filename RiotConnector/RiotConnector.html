@@ -37,13 +37,15 @@
 //        });
         var schema = [
             {
-                "alias": "People",
-                "id": "people",
+                "alias": "Champion",
+                "id": "riot",
                 "columns": [
-                    { "id": "name", "dataType": "string" },
-                    { "id": "height", "dataType": "int" },
-                    { "id": "mass", "dataType": "int" },
-                    { "id": "gender", "dataType": "string" }
+                    { "id": "active", "dataType": "boolean" },
+                    { "id": "botEnabled", "dataType": "boolean" },
+                    { "id": "botMmEnabled", "dataType": "boolean" },
+                    { "id": "rankedPlayEnabled", "dataType": "boolean" },
+                    { "id": "id", "dataType": "long" },
+                    { "id": "freeToPlay", "dataType": "boolean" }
                 ]
             },
             {
@@ -62,15 +64,15 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
-/*
-        var apiURL = 'http://swapi.co/api/' + table.tableInfo.id;
+
+        var apiURL = 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=info&api_key=9a8c5cb8-78ae-4907-a3d7-1c718c2a2000';
         $.ajax(apiURL, {
             method: 'GET'
         }).then(function(data) {
-            table.appendRows(data.results);
+            table.appendRows(data.champions);
             doneCallback();
         });
- */
+ /*
         getAllREST = function(apiURL, table) {
             $.ajax(apiURL, {
                 method: 'GET'
@@ -90,6 +92,7 @@
 
         var apiURL = 'http://swapi.co/api/' + table.tableInfo.id + '/?page=1';
         getAllREST(apiURL,table);
+ */
      };
      
 
