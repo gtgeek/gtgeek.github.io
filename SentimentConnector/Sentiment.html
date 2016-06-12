@@ -27,6 +27,8 @@
 	<script src="https://connectors.tableau.com/libs/tableauwdc-2.0.0-beta.js" type="text/javascript"></script>
 	<script type="text/javascript">
 
+//  http://loocalhost:8888/gtgeek.github.io/SentimentConnector/Sentiment.html
+
 (function() {
     var myConnector = tableau.makeConnector();
     
@@ -91,87 +93,18 @@
         }
 
         getAllREST(tweets, tweets.length - 1);
-
-//        "url": "http://www.sentiment140.com/api/bulkClassifyJson",
-
-
-/*
-
-
-        var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.lendingclub.com/api/investor/v1/accounts/" + i_id + "/summary",
-        "method": "GET",
-        "dataType": "json",
-        "headers": {
-            "Authorization": i_apiKey,
-            "cache-control": "no-cache"
-            }
-        }
-        console.log('yo');
-try {
-        $.ajax(settings).done(function (response) {
-            console.log('done');
-            console.log(response);
-            table.appendRows(response);
-            doneCallback();
-        });
-} catch(e) {
-    console.log(e);
-}
-
-        var apiURL = 'https://api.lendingclub.com/api/investor/v1/accounts/' + i_id + '/summary';
-        console.log(apiURL);
-        console.log({
-                'Authorization':i_apiKey,
-                'Access-Control-Allow-Origin': '*'
-            });
-        $.ajax(apiURL, {
-            method: 'GET',
-            headers: {
-                'Authorization':i_apiKey,
-                'Access-Control-Allow-Origin': '*'
-            }
-        }).then(function(data) {
-            table.appendRows(data);
-            doneCallback();
-        });
-
-        getAllREST = function(apiURL, table) {
-            $.ajax(apiURL, {
-                method: 'GET'
-            }).then(function(data) {
-                console.log(data.next);
-                table.appendRows(data.results);
-                if (data.next != null) {
-                    apiURL = apiURL.substr(0,apiURL.indexOf('=')+1) + (parseInt(apiURL.substr(apiURL.indexOf('=')+1)) + 1);
-                    getAllREST(apiURL, table);
-                } else {
-                    console.log('done call');
-                    doneCallback();
-                    console.log('done callback');
-                }
-            });        
-        };
-
-        var apiURL = 'http://swapi.co/api/' + table.tableInfo.id + '/?page=1';
-        getAllREST(apiURL,table);
-*/
-
      };
      
 
      setupConnector = function() {
         tableau.connectionName = "Sentiment API";
 
-            var i_id = $("#i_id").val();
         var tweets = [];
-        var ta_tweets = $("#ta_tweets").val().split("\n");
-        for (s of ta_tweets) {
-            tweets.push({"text":s});
-        }
-        console.log(tweets);
+        $("#ta_tweets").val().split("\n").forEach(function (item) {
+            console.log(item);
+            tweets.push({"text":item});
+        });
+
         var connectionData = {
             "data": tweets
         };
