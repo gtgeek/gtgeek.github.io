@@ -30,7 +30,7 @@
     }
 
     // Set the default connector here
-    return "../gtgeek.github.io/SentimentConnector/Sentiment.html";
+    return "SentimentConnector/Sentiment.html";
   }
   
   function WdcCommandSimulator(/*ISendPostMessage*/ sendPostMessage, /*IPhaseChangeHandler*/ onPhaseChange, /*IEventHandler*/ onEvent, /*ILogger*/ logger) {
