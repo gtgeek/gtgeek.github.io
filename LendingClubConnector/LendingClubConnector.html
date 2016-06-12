@@ -1,3 +1,9 @@
+curl --get --include 'https://loudelement-free-natural-language-processing-service.p.mashape.com/nlp-text/?text=Friends+and+fellow+sailors+mourned+double+Olympic+medalist+Andrew+%22Bart%22+Simpson+after+the+shocking+news+that+he+had+died+in+San+Francisco+Bay+while+training+for+the+America's+Cup.' -H 'X-Mashape-Key: 2RgEaz6XJcmshfE7b2IaYyCsgE8up1mzrpFjsnvB8QXJD2NWa9' -H 'Accept: application/json'
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +41,57 @@
             {
                 "alias": "Summary",
                 "id": "Summary",
+                "columns": [
+                    { "id": "investorId", "dataType": "int" },
+                    { "id": "availableCash", "dataType": "float" },
+                    { "id": "accountTotal", "dataType": "float" },
+                    { "id": "accruedInterest", "dataType": "float" },
+                    { "id": "infundingBalance", "dataType": "float" },
+                    { "id": "receivedInterest", "dataType": "float" },
+                    { "id": "receivedPrincipal", "dataType": "float" },
+                    { "id": "receivedLateFees", "dataType": "float" },
+                    { "id": "outstandingPrincipal", "dataType": "float" },
+                    { "id": "totalNotes", "dataType": "float" },
+                    { "id": "totalPortfolios", "dataType": "float" }
+                ]
+            },
+            {
+                "alias": "Notes Owned",
+                "id": "Notes Owned",
+                "columns": [
+                    { "id": "investorId", "dataType": "int" },
+                    { "id": "availableCash", "dataType": "float" },
+                    { "id": "accountTotal", "dataType": "float" },
+                    { "id": "accruedInterest", "dataType": "float" },
+                    { "id": "infundingBalance", "dataType": "float" },
+                    { "id": "receivedInterest", "dataType": "float" },
+                    { "id": "receivedPrincipal", "dataType": "float" },
+                    { "id": "receivedLateFees", "dataType": "float" },
+                    { "id": "outstandingPrincipal", "dataType": "float" },
+                    { "id": "totalNotes", "dataType": "float" },
+                    { "id": "totalPortfolios", "dataType": "float" }
+                ]
+            },
+            {
+                "alias": "Detailed Notes Owned",
+                "id": "Detailed Notes Owned",
+                "columns": [
+                    { "id": "investorId", "dataType": "int" },
+                    { "id": "availableCash", "dataType": "float" },
+                    { "id": "accountTotal", "dataType": "float" },
+                    { "id": "accruedInterest", "dataType": "float" },
+                    { "id": "infundingBalance", "dataType": "float" },
+                    { "id": "receivedInterest", "dataType": "float" },
+                    { "id": "receivedPrincipal", "dataType": "float" },
+                    { "id": "receivedLateFees", "dataType": "float" },
+                    { "id": "outstandingPrincipal", "dataType": "float" },
+                    { "id": "totalNotes", "dataType": "float" },
+                    { "id": "totalPortfolios", "dataType": "float" }
+                ]
+            },
+            {
+                "alias": "Listed Loans",
+                "id": "Listed Loans",
                 "columns": [
                     { "id": "investorId", "dataType": "int" },
                     { "id": "availableCash", "dataType": "float" },
