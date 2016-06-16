@@ -38,9 +38,13 @@
                 "alias": "Sentiment",
                 "id": "Sentiment",
                 "columns": [
-                    { "id": "text", "dataType": "string" },
-                    { "id": "rating", "dataType": "float" },
-                    { "id": "sentiment", "dataType": "string" }
+                    { "id": "Text", "dataType": "string" },
+                    { "id": "Rating", "dataType": "float" },
+                    { "id": "Sentiment", "dataType": "string" },
+                    { "id": "Word_Count", "dataType": "int" },
+                    { "id": "Mention_Count", "dataType": "int" },
+                    { "id": "Hashtag_Count", "dataType": "int" },
+                    { "id": "ReTweet", "dataType": "string" }
                 ]
             }
         ];
@@ -67,12 +71,13 @@
     myConnector.getData = function(table, doneCallback) {
         var connectionData = JSON.parse(tableau.connectionData);
         var tweets = connectionData.data;
+        var rows = [];
 
         getAllREST = function(tweets, rowId) {
             var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "https://sentimentapi.p.mashape.com/products/api/extractsentiment?text=" + tweets[rowId].text,
+            "url": "https://sentimentapi.p.mashape.com/products/api/extractsentiment?text=" + tweets[rowId].text.replace("#","%23"),
             "method": "GET",
             "headers": {
                 "X-Mashape-Key": "2RgEaz6XJcmshfE7b2IaYyCsgE8up1mzrpFjsnvB8QXJD2NWa9",
@@ -81,18 +86,29 @@
                 }
             }
             $.ajax(settings).done(function (response) {
-                table.appendRows({"text":this.url.substring("https://sentimentapi.p.mashape.com/products/api/extractsentiment?text=".length) 
-                                    ,"rating":response.rating
-                                    ,"sentiment":ratingToText(response.rating)
-                                });
+                var sText = this.url.substring("https://sentimentapi.p.mashape.com/products/api/extractsentiment?text=".length).replace("%23","#");
+                rows.push({"Text":sText 
+                                ,"Rating":response.rating
+                                ,"Sentiment":ratingToText(response.rating)
+                                ,"Word_Count":sText.split(" ").length
+                                ,"Mention_Count":sText.split("@").length - 1
+                                ,"Hashtag_Count":sText.split("#").length - 1
+                                ,"ReTweet":(sText.substring(0,2) == "RT" ? "Yes" : "No")
+                            });
                 if (rowId > 0)
                     getAllREST(tweets, parseInt(rowId) - 1);
                 else
-                    doneCallback();
+                    doneIam();
             });
         }
 
         getAllREST(tweets, tweets.length - 1);
+
+        doneIam = function() {
+            console.log(rows);
+            table.appendRows(rows);
+            doneCallback();
+        }
      };
      
 
