@@ -1,32 +1,329 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
+
 <head>
-    <meta http-equiv="Cache-Control" content="no-store" />
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <title>Web Data Connector Host</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-          crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-
-    <script src="https://fb.me/react-with-addons-0.14.6.js"></script>
-    <script src="https://fb.me/react-dom-0.14.6.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.28.1/react-bootstrap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.9.0/validate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="wdc-simulator.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
+
 <body>
-    <div id="simulatorRoot"></div>
-    <script>
-        ReactDOM.render(
-            Tableau.SimulatorApp.element(),
-            document.getElementById('simulatorRoot')
-        );
-    </script>
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#experience">Experience</a>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+            </li>
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+            <li>
+                <a href="#skills">Skills</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>Davis Knowles</h1>
+            <h2>Data Engineer</h2>
+            <a href="dk_resume.pdf" class="btn-rounded-white">Download Resume</a>
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="heading">About Me</h2>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        Hello World! I'm Davis Knowles. Born and raised in Georgia, I played inside linebacker 
+                        for Georgia State's inaugural football program where I earned my Bachelor's in Business. 
+                        After college, I cut my teeth as a welder building a business in the manufacturing industry. 
+                        My curiosity led me to a stint in the Middle East, where I studied Arabic before returning to 
+                        Atlanta to start a family. I am bringing my Blue-Collar work ethic to my passion for Data Science.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #about -->
+
+    <div id="experience" class="background-alt">
+        <h2 class="heading">Experience</h2>
+        <div id="experience-timeline">
+          <div data-date="June 2020 – Present">
+              <h3>Alta Refrigeration</h3>
+              <h4>6G Welder - Expert Piping Team</h4>
+              <p>
+                  As a pipe welder at Alta, I earned 3 welding certifications and a promotion within the first 9 months of employment. 
+              </p>
+          </div>
+          <div data-date="August 2018 – June 2020">
+              <h3>B10 Union</h3>
+              <h4>Production Lead</h4>
+              <p>
+                  I managed a manufacturing team of five.
+              </p>
+          </div>
+          <div data-date="February 2017 – July 2018">
+              <h3>Frontier Alliance Internatinal</h3>
+              <h4>Arabic Studies</h4>
+              <p>
+                  Full time student at the Kelsey Arabic Program.
+              </p>
+            </div>
+
+            <div data-date="January 2014 – February 2017">
+                <h3>Knowles Welding Services, LLC</h3>
+                <h4>Owner/ Welder</h4>
+                <p>
+                    Custom fabrication for commercial/ residential in Southeast.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- End #experience -->
+
+    <div id="education">
+        <h2 class="heading">Education</h2>
+        <div class="education-block">
+            <h3>Georgia Tech</h3>
+            <span class="education-date">December 2020 - June 2021</span>
+            <h4>Certificate in Data Science and Analytics</h4>
+        </div>
+        <!-- End .education-block -->
+
+        <div class="education-block">
+            <h3>Georgia State University</h3>
+            <span class="education-date">August 2009 - May 2013</span>
+            <h4>Bachelor's in Business Administration</h4>
+        </div>
+        <!-- End .education-block -->
+    </div>
+    <!-- End #education -->
+
+    <div id="projects" class="background-alt">
+        <h2 class="heading">Projects</h2>
+        <div class="container">
+            <div class="row">
+              <!-- projects to include: web-scraping, sql, Pandas, Python -->
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/mars-mission.jpeg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Missions to Mars</h3>
+                        <p>
+                            I built a web application that scrapes various websites for data related to NASA's Mission to Mars and displays the information in a single HTML page.
+                        </p>
+                        <a href="https://github.com/davisknowles/web-scraping-challenge.git">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/sql.png" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Employee Database: A Mystery in Two Parts</h3>
+                        <p>
+                            I designed the tables to hold data in the CSVs, import the CSVs into a SQL database, 
+                            and analyzed the data. 
+                        </p>
+                        <a href="https://github.com/davisknowles/sql-challenge.git">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/pandas.png" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>Heroes of Pymoli: Video Game Analytics</h3>
+                        <p>
+                            In this project, I took on the role of a data analyst mining for insights within a new video game.
+                            I generated a report breaking down purchasing data into meaningful insight. 
+                        </p>
+                        <a href="https://github.com/davisknowles/pandas-challenge-.git">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/python.png" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>PyBank: Financial Analysis</h3>
+                        <p>
+                            In this project, I created a Python script for analyzing financial records. 
+                        </p>
+                        <a href="https://github.com/davisknowles/python-challenge.git">View Project</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+                
+                <!-- End .project -->
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/project.jpg" />
+                    </div>
+                    <!-- End .project-image -->
+                    <div class="project-info">
+                        <h3>More Projects</h3>
+                        <p>
+                            In addition to the above projects, please visit my Github repo page for my full portfolio of code.
+                        </p>
+                        <a href="https://github.com/davisknowles">View My Projects</a>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+                <!-- End .project -->
+            </div>
+        </div>
+    </div>
+    <!-- End #projects -->
+
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <!-- <li>Ruby</li> -->
+            <li>MySQL</li>
+            <li>D3.js</li>
+            <li>Flask</li>
+            <li>SQLAlchemy</li>
+            <li>MongoDB</li>
+            <li>Jupyter Notebook</li>
+            <li>PyMongo</li>
+            <li>Plotly</li>
+            <li>Numpy</li>
+            <li>Pandas</li>
+            <li>Bootstrap</li>
+            <li>Leaflet.js</li>
+            <li>R</li>
+            <li>Tableau</li>
+            <li>Sklearn</li>
+            <li>Keras</li>
+            <li>Hadoop</li>
+            <li>Spark</li>
+            <li>MapReduce</li>
+            <li>PySpark</li>
+            <li>RESTful APIs</li>
+            <li>Matplotlib</li>
+            <li>Beautiful Soup</li>
+            <li>Splinter/Selenium</li>
+        </ul>
+    </div>
+    <!-- End #skills -->
+
+    <div id="contact">
+        <h2>Get in Touch</h2>
+        <div id="contact-form">
+            <form method="POST" action="https://formspree.io/dknowles52@gmail.com">
+                <input type="hidden" name="_subject" value="Contact request from personal website" />
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="email" name="_replyto" placeholder="Your email" required>
+                <textarea name="message" placeholder="Your message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <!-- End #contact-form -->
+    </div>
+    <!-- End #contact -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; 2021 Davis Knowles
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-sm-5 social">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/davisknowles" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                        <!-- <li>
+                            <a href="https://stackexchange.com/" target="_blank"><i class="fa fa-stack-overflow" aria-hidden="true"></i></a>
+                        </li> -->
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/dknowles52/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </li>
+                        <!-- <li>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        </li> -->
+                        <li>
+                        <!-- <li>
+                            <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        </li> -->
+                        </li>
+                        <!-- <li>
+                            <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/scripts.min.js"></script>
 </body>
+
 </html>
